@@ -2,15 +2,11 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 
-const requestSpriteFile = require.context(
-  "pokemon-sprites/sprites/pokemon",
-  false,
-  /.png$/
-);
+import { getSprite } from "../helpers/SpriteHelpers";
 
 const Pokemon = () => {
   const { id } = useParams();
-  const image = requestSpriteFile(`./${id}.png`);
+  const image = getSprite(id);
 
   const { isLoading, error, data } = useQuery(
     `pokemon/${id}`,
@@ -21,14 +17,18 @@ const Pokemon = () => {
     { staleTime: 1200000 }
   );
 
-  if (isLoading) return "Loading...";
-
-  if (error) return "An error has occurred: " + error.message;
-
   return (
     <div>
-      <div className="capitalize">{data.name}</div>
-      <img src={image.default} alt={id} />
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : error !== null ? (
+        <p>Error: {error.message}</p>
+      ) : (
+        <>
+          <div className="capitalize">{data.name}</div>
+          <img src={image} alt={id} />
+        </>
+      )}
     </div>
   );
 };

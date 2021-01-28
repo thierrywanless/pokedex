@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "react-query";
 
 import Home from "./pages/Home";
-import Pokemon from "./pages/Pokemon";
+import Pokemon from "./pages/AboutPokemon";
 
 const queryClient = new QueryClient();
 
