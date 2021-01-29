@@ -1,8 +1,10 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useQuery } from "react-query";
 
 import { getSprite } from "../helpers/SpriteHelpers";
+import TypeChip from "../components/TypeChip";
+import StatGauge from "../components/StatGauge";
 
 const Pokemon = () => {
   const { id } = useParams();
@@ -24,12 +26,48 @@ const Pokemon = () => {
       ) : error !== null ? (
         <p>Error: {error.message}</p>
       ) : (
-        <div className="flex flex-col content-center items-center pt-10 relative">
-          <div className="absolute top-0 left-0 pl-3 pr-3 pt-1 pb-1 rounded-br-2xl bg-cream border-r-2 border-b-2">
+        <div className="pt-20 relative">
+          <div className="absolute top-0 right-0 px-5 py-1 rounded-bl-2xl bg-cream border-l-2 border-b-2">
             <p className="text-3xl text-white">#{data.id}</p>
           </div>
-          <h1 className="capitalize text-white text-4xl">{data.name}</h1>
-          <img src={image} alt={id} />
+          <div className="absolute top-1 left-0 pl-3 pr-3 pt-1 pb-1">
+            <Link
+              to="/"
+              className="text-2xl text-white no-underline hover:underline"
+            >
+              &larr; All Pokemon
+            </Link>
+          </div>
+
+          <div className="flex flex-col items-center">
+            <h1 className="capitalize text-white text-4xl">{data.name}</h1>
+            <img className="mt-5" src={image} alt={id} />
+            <div className="flex space-x-5 mt-5">
+              {data.types.map((type, index) => (
+                <TypeChip type={type.type} key={index} />
+              ))}
+            </div>
+            <div className="flex space-x-10 mt-8">
+              <div className="flex flex-col items-center">
+                {/* Weight - convert hectograms to kg */}
+                <p className="text-white text-2xl">{data.weight / 10} KG</p>
+                <p className="text-gray-400 text-base">Weight</p>
+              </div>
+              <div className="flex flex-col items-center">
+                {/* Height - convert decimeters to m */}
+                <p className="text-white text-2xl">{data.height / 10} M</p>
+                <p className="text-gray-400 text-base">Height</p>
+              </div>
+            </div>
+            <div className="flex flex-col mt-8 text-white">
+              <h3 className="text-2xl self-center">Base Stats</h3>
+              <div className="flex flex-col content-start mt-2 space-y-3">
+                {data.stats.map((stat) => (
+                  <StatGauge stat={stat} maxStat={255} />
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>

@@ -44,7 +44,31 @@ export const getColorForType = (type) => {
     case "fairy":
       return getPropName(Colors, Colors.fairyType);
     default:
-      throw new Error(`Pokemon type not configured: ${type}`);
+      throw new Error(`Pokemon type not configured: ${type.name}`);
+  }
+};
+
+/**
+ * Provides the color className for tailwind color class
+ *
+ * @param {string} statName - Stat Name
+ */
+export const getColorForStat = (statName) => {
+  switch (statName) {
+    case "hp":
+      return getPropName(Colors, Colors.hpStat);
+    case "attack":
+      return getPropName(Colors, Colors.attackStat);
+    case "defense":
+      return getPropName(Colors, Colors.defenseStat);
+    case "special-attack":
+      return getPropName(Colors, Colors.specialAttackStat);
+    case "special-defense":
+      return getPropName(Colors, Colors.specialDefenseStat);
+    case "speed":
+      return getPropName(Colors, Colors.speedStat);
+    default:
+      throw new Error(`Stat type not configured: ${statName}`);
   }
 };
 

@@ -11,9 +11,9 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Router>
         <div className="h-auto min-h-screen bg-gray-600">
-          <Link to="/">
-            <header className="flex justify-center p-4 bg-red-500">
-              <h1 className="text-4xl text-white">Pokedex</h1>
+          <Link to="/" className="text-white hover:text-gray-500">
+            <header className="flex p-4 justify-center content-center bg-red-500">
+              <h1 className="text-4xl">Pokedex</h1>
             </header>
           </Link>
           <Switch>

@@ -8,6 +8,9 @@ module.exports = {
       colors: {
         ...colors,
       },
+      width: {
+        "255px": "255px",
+      },
     },
   },
   variants: {

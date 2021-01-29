@@ -5,6 +5,7 @@ const Colors = {
     dark: "#b09753",
   },
 
+  // Types
   normalType: {
     light: "#C6C6A7",
     DEFAULT: "#A8A878",
@@ -94,6 +95,26 @@ const Colors = {
     light: "#F4BDC9",
     DEFAULT: "#EE99AC",
     dark: "#9B6470",
+  },
+
+  // Stats
+  hpStat: {
+    DEFAULT: "#FF0000",
+  },
+  attackStat: {
+    DEFAULT: "#F08030",
+  },
+  defenseStat: {
+    DEFAULT: "#F8D030",
+  },
+  specialAttackStat: {
+    DEFAULT: "#6890F0",
+  },
+  specialDefenseStat: {
+    DEFAULT: "#78C850",
+  },
+  speedStat: {
+    DEFAULT: "#F85888",
   },
 };
 
