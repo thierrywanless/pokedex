@@ -10,15 +10,19 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
-        <Link to="/">
-          <header className="text-4xl">Pokedex</header>
-        </Link>
-        <Switch>
-          <Route path="/pokemon/:id" children={<Pokemon />} />
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
+        <div className="h-auto min-h-screen bg-gray-600">
+          <Link to="/">
+            <header className="flex justify-center p-4 bg-red-500">
+              <h1 className="text-4xl text-white">Pokedex</h1>
+            </header>
+          </Link>
+          <Switch>
+            <Route path="/pokemon/:id" children={<Pokemon />} />
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </div>
       </Router>
     </QueryClientProvider>
   );

@@ -9,7 +9,7 @@ import Pokemon from "../components/Pokemon";
 const PokemonPaginate = () => {
   // Provides a paginated list requested by the url
   const fetchPokemonPaginated = ({
-    pageParam = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=100",
+    pageParam = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=10",
   }) => {
     return fetch(pageParam)
       .then((res) => res.json())
@@ -34,7 +34,7 @@ const PokemonPaginate = () => {
     hasNextPage,
     isFetching,
     isFetchingNextPage,
-    status,
+    isLoading,
   } = useInfiniteQuery("pokemon", fetchPokemonPaginated, {
     // Next page is provided from the current page results
     getNextPageParam: (lastPage, pages) => lastPage.next,
@@ -43,13 +43,13 @@ const PokemonPaginate = () => {
 
   return (
     <div>
-      {status === "loading" ? (
+      {isLoading ? (
         <p>Loading...</p>
-      ) : status === "error" ? (
+      ) : error !== null ? (
         <p>Error: {error.message}</p>
       ) : (
         <>
-          <div className="flex flex-wrap">
+          <div className="mt-5 px-2 grid justify-items-center pokemon-grid-template gap-y-3">
             {data.pages.map((group, i) => (
               <React.Fragment key={i}>
                 {group.results.map((pokemon) => (
@@ -58,8 +58,9 @@ const PokemonPaginate = () => {
               </React.Fragment>
             ))}
           </div>
-          <div>
+          <div className="m-4 flex justify-center">
             <button
+              className="bg-red-500 hover:bg-red-700 py-2 px-4 text-white font-bold rounded-full"
               onClick={() => fetchNextPage()}
               disabled={!hasNextPage || isFetchingNextPage}
             >

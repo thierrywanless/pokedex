@@ -13,7 +13,7 @@ const PokemonSearch = ({ search }) => {
 
   // PokeAPI does not support search currently - Get all results and filter by search query manually
   const fetchPokemonSearch = () => {
-    return fetch(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=9999`)
+    return fetch(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=10`)
       .then((res) => res.json())
       .then((data) => {
         const results = data.results.map((pokemon) => {
@@ -37,15 +37,21 @@ const PokemonSearch = ({ search }) => {
 
   // Set delay between filtering pokemon - avoids unnecessary filtering
   useEffect(() => {
-    const timer = setTimeout(() => {
-      const filteredPokemon = data.results.filter((pokemon) =>
-        pokemon.name.includes(search)
-      );
+    // Only filter when search query is longer than 3 characters
+    // Avoids overusing the API
+    if (search.length >= 3) {
+      const timer = setTimeout(() => {
+        // Filter pokemon locally before requesting from the API
+        const filteredPokemon = data.results.filter((pokemon) =>
+          pokemon.name.includes(search)
+        );
 
-      setPokemon(filteredPokemon);
-    }, 200);
+        setPokemon(filteredPokemon);
+      }, 200);
 
-    return () => clearTimeout(timer);
+      // Clear up timed function
+      return () => clearTimeout(timer);
+    }
   }, [search, data]);
 
   return (
@@ -56,7 +62,7 @@ const PokemonSearch = ({ search }) => {
         <p>Error: {error.message}</p>
       ) : (
         <>
-          <div className="flex flex-wrap">
+          <div className="mt-5 grid justify-items-center pokemon-grid-template gap-y-3">
             {pokemon.map((pokemon) => (
               <Pokemon pokemon={pokemon} />
             ))}
