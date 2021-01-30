@@ -1,4 +1,5 @@
 import React from "react";
+import CountUp from "react-countup";
 
 import { getColorForStat } from "../helpers/ColorHelpers";
 
@@ -13,9 +14,6 @@ const StatGauge = ({ stat, maxStat }) => {
     base_stat: baseStat,
     stat: { name },
   } = stat;
-
-  // Calculate percentage of base stat / max stat
-  const statPercentage = (baseStat / maxStat) * 100;
 
   const getStatLabel = (statName) => {
     switch (statName) {
@@ -43,11 +41,21 @@ const StatGauge = ({ stat, maxStat }) => {
       <p className="uppercase text-xl w-10">{getStatLabel(name)}</p>
       <div className="w-255px bg-white h-8 rounded-full relative overflow-hidden">
         <div
-          className={`h-8 bg-${statColor} rounded-full flex items-center justify-center`}
-          style={{ width: `${statPercentage}%` }}
+          className={`h-8 bg-${statColor} rounded-full flex items-center justify-center animate-stat`}
+          // Set max width of stat bar
+          style={{ maxWidth: `${baseStat}px` }}
         ></div>
+
         <span className="text-gray-700 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          {baseStat} / {maxStat}
+          <CountUp
+            start={0}
+            end={baseStat}
+            duration={1.5}
+            delay={0}
+            suffix={` / ${maxStat}`}
+          >
+            {({ countUpRef }) => <p ref={countUpRef} />}
+          </CountUp>
         </span>
       </div>
     </div>

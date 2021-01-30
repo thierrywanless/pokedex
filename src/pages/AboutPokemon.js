@@ -1,12 +1,13 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "react-query";
+import CountUp from "react-countup";
 
 import { getSprite } from "../helpers/SpriteHelpers";
 import TypeChip from "../components/TypeChip";
 import StatGauge from "../components/StatGauge";
 
-const Pokemon = () => {
+const AboutPokemon = () => {
   const { id } = useParams();
   const image = getSprite(id);
 
@@ -50,20 +51,42 @@ const Pokemon = () => {
             <div className="flex space-x-10 mt-8">
               <div className="flex flex-col items-center">
                 {/* Weight - convert hectograms to kg */}
-                <p className="text-white text-2xl">{data.weight / 10} KG</p>
+                <CountUp
+                  start={0.0}
+                  end={data.weight / 10}
+                  duration={1.5}
+                  delay={0}
+                  decimals={1}
+                  suffix=" KG"
+                >
+                  {({ countUpRef }) => (
+                    <p className="text-white text-2xl" ref={countUpRef} />
+                  )}
+                </CountUp>
                 <p className="text-gray-400 text-base">Weight</p>
               </div>
               <div className="flex flex-col items-center">
                 {/* Height - convert decimeters to m */}
-                <p className="text-white text-2xl">{data.height / 10} M</p>
+                <CountUp
+                  start={0.0}
+                  end={data.height / 10}
+                  duration={1.5}
+                  delay={0}
+                  decimals={1}
+                  suffix=" M"
+                >
+                  {({ countUpRef }) => (
+                    <p className="text-white text-2xl" ref={countUpRef} />
+                  )}
+                </CountUp>
                 <p className="text-gray-400 text-base">Height</p>
               </div>
             </div>
             <div className="flex flex-col mt-8 text-white">
               <h3 className="text-2xl self-center">Base Stats</h3>
               <div className="flex flex-col content-start mt-2 space-y-3">
-                {data.stats.map((stat) => (
-                  <StatGauge stat={stat} maxStat={255} />
+                {data.stats.map((stat, index) => (
+                  <StatGauge stat={stat} maxStat={255} key={index} />
                 ))}
               </div>
             </div>
@@ -74,4 +97,4 @@ const Pokemon = () => {
   );
 };
 
-export default Pokemon;
+export default AboutPokemon;

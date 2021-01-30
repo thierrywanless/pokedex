@@ -11,6 +11,15 @@ module.exports = {
       width: {
         "255px": "255px",
       },
+      animation: {
+        stat: "stat 3s linear",
+      },
+      keyframes: {
+        stat: {
+          "0%": { width: "0%" },
+          "100%": { width: "100%" },
+        },
+      },
     },
   },
   variants: {

@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "react-query";
 
 import Home from "./pages/Home";
-import Pokemon from "./pages/AboutPokemon";
+import AboutPokemon from "./pages/AboutPokemon";
 
 const queryClient = new QueryClient();
 
@@ -17,7 +17,7 @@ function App() {
             </header>
           </Link>
           <Switch>
-            <Route path="/pokemon/:id" children={<Pokemon />} />
+            <Route path="/pokemon/:id" children={<AboutPokemon />} />
             <Route path="/">
               <Home />
             </Route>

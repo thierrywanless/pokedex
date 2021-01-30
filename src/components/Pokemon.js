@@ -35,7 +35,9 @@ const Pokemon = ({ pokemon }) => {
   return (
     <>
       {sprite && (
-        <div className={`p-4 pt-8 relative rounded-2xl bg-${color}`}>
+        <div
+          className={`p-4 pt-8 relative rounded-2xl bg-${color} transition duration-500 ease-out transform hover:-translate-y-1 hover:scale-110`}
+        >
           <Link
             to={`/pokemon/${data.id}`}
             className="flex flex-col justify-center"
