@@ -13,7 +13,7 @@ const PokemonSearch = ({ search }) => {
 
   // PokeAPI does not support search currently - Get all results and filter by search query manually
   const fetchPokemonSearch = () => {
-    return fetch(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=10`)
+    return fetch(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=9999`)
       .then((res) => res.json())
       .then((data) => {
         const results = data.results.map((pokemon) => {
