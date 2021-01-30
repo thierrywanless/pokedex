@@ -7,9 +7,10 @@ import AboutPokemon from "./pages/AboutPokemon";
 const queryClient = new QueryClient();
 
 function App() {
+  console.log(process.env.PUBLIC_URL);
   return (
     <QueryClientProvider client={queryClient}>
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <div className="h-auto min-h-screen bg-gray-600">
           <Link to="/" className="text-white hover:text-gray-500">
             <header className="flex p-4 justify-center content-center bg-red-500">

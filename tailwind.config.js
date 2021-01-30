@@ -1,7 +1,14 @@
 const colors = require("./src/styles/colors");
 
 module.exports = {
-  purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
+  purge: {
+    content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
+
+    options: {
+      // Do not purge custom background colors
+      safelist: Object.keys(colors).map((color) => `bg-${color}`),
+    },
+  },
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
